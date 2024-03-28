@@ -65,6 +65,16 @@ echo "Starting and enabling Tomcat service..."
 systemctl start tomcat
 systemctl enable tomcat
 
+git clone -b main https://github.com/ALabiyb/DevsOps-Project.git
+cd DevsOps-Project/
+mvn clean install
+systemctl stop tomcat
+sleep 20
+rm -rf /usr/local/tomcat/webapps/ROOT*
+cp target/DevsOps-Project.war /usr/local/tomcat/webapps/ROOT.war
+systemctl start tomcat
+sleep 10
+
 # Enabling the firewall and allowing port 8080 to access Tomcat
 echo "Enabling firewall and allowing port 8080..."
 systemctl start firewalld
