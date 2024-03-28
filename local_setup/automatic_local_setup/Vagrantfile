@@ -24,12 +24,12 @@ Vagrant.configure("2") do |config|
       vb.memory = "2048"
       vb.cpus = "2"
     end
-    db.vm.provision "shell", path: "database.sh"
+    db.vm.provision "shell", path: "mysql.sh"
   end
 
   # Memcache Vm
   config.vm.define "memcache" do |mem|
-    mem.vm.box = "eurolinux-vagrant/centos-stream9"
+    mem.vm.box = "eurolinux-vagrant/centos-stream-9"
     mem.vm.hostname = "memcache"
     mem.vm.network "private_network", ip: "192.168.33.11"
     mem.vm.provider "virtualbox" do |vb|
@@ -41,7 +41,7 @@ Vagrant.configure("2") do |config|
 
   # Rabbit MQ VM
   config.vm.define "rabbitmq" do |rabbit|
-    rabbit.vm.box = "eurolinux-vagrant/centos-stream9"
+    rabbit.vm.box = "eurolinux-vagrant/centos-stream-9"
     rabbit.vm.hostname = "rabbitmq"
     rabbit.vm.network "private_network", ip: "192.168.33.12"
     rabbit.vm.provider "virtualbox" do |vb|
