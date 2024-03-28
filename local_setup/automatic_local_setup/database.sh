@@ -42,7 +42,7 @@ MYSQL_SCRIPT
 
 # Download Source code & Initialize Database.
 git clone -b main https://github.com/ALabiyb/DevsOps-Project.git
-cd vprofile-project
+cd DevsOps-Project
 mysql -u root -padmin123 accounts < src/db.sql
 mysql -u root -padmin123 accounts <<MYSQL_SCRIPT
 show tables;
