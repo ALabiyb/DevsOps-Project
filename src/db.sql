@@ -1,6 +1,6 @@
-CREATE DATABASE accounts;
+/*CREATE DATABASE accounts;*/
 
-USE accounts;
+/*USE accounts;*/
 
 CREATE TABLE role (
     `id` INT(11) NOT NULL AUTO_INCREMENT,
