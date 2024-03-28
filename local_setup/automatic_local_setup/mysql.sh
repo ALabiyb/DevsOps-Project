@@ -1,17 +1,19 @@
 #!/bin/bash
 
+DATABASE_PASS='admin123'
+
 # Update OS with latest patches
-yum update -y
+sudo yum update -y
 
 # Set Repository
-yum install epel-release -y
+sudo yum install epel-release -y
 
 # Install MariaDB Package
-yum install git mariadb-server -y
+sudo yum install git zip unzip mariadb-server -y
 
 # Starting & enabling mariadb-server
-systemctl start mariadb
-systemctl enable mariadb
+sudo systemctl start mariadb
+sudo systemctl enable mariadb
 
 # Run mysql secure installation script.
 mysql_secure_installation <<EOF
@@ -27,21 +29,29 @@ Y
 EOF
 
 # Set DB name and users.
-mysql -u root -padmin123 <<MYSQL_SCRIPT
-create database accounts;
-grant all privileges on accounts.* TO 'admin'@'%' identified by 'admin123';
-FLUSH PRIVILEGES;
-exit
-MYSQL_SCRIPT
+#mysql -u root -padmin123 <<MYSQL_SCRIPT
+#create database accounts;
+#grant all privileges on accounts.* TO 'admin'@'%' identified by 'admin123';
+#FLUSH PRIVILEGES;
+#exit
+#MYSQL_SCRIPT
+
 
 # Download Source code & Initialize Database.
+cd /tmp/
 git clone -b main https://github.com/ALabiyb/DevsOps-Project.git
-cd DevsOps-Project
-mysql -u root -padmin123 accounts < src/db.sql
-mysql -u root -padmin123 accounts <<MYSQL_SCRIPT
-show tables;
-exit
-MYSQL_SCRIPT
+sudo mysql -u root password "$DATABASE_PASS"
+sudo mysql -u root -p"$DATABASE_PASS" -e "DELETE FROM mysql.user WHERE User='root' AND Host NOT IN ('localhost', '127.0.0.1', '::1')"
+sudo mysql -u root -p"$DATABASE_PASS" -e "DELETE FROM mysql.user WHERE User=''"
+sudo mysql -u root -p"$DATABASE_PASS" -e "DELETE FROM mysql.db WHERE Db='test' OR Db='test\_%'"
+sudo mysql -u root -p"$DATABASE_PASS" -e "FLUSH PRIVILEGES"
+sudo mysql -u root -p"$DATABASE_PASS" -e "create database accounts"
+sudo mysql -u root -p"$DATABASE_PASS" -e "grant all privileges on accounts.* TO 'admin'@'localhost' identified by 'admin123'"
+sudo mysql -u root -p"$DATABASE_PASS" -e "grant all privileges on accounts.* TO 'admin'@'%' identified by 'admin123'"
+sudo mysql -u root -p"$DATABASE_PASS" accounts < src/db.sql
+sudo mysql -u root -p"$DATABASE_PASS" -e "FLUSH PRIVILEGES"
+mysql -u root -padmin123 accounts < /tmp/DevsOps-Project/src/db.sql
+sudo mysql -u root -p"$DATABASE_PASS" -e "FLUSH PRIVILEGES"
 
 # Restart mariadb-server
 systemctl restart mariadb
