@@ -27,7 +27,7 @@ Vagrant.configure("2") do |config|
     db.vm.provision "shell", path: "database.sh"
   end
 
-   Memcache Vm
+  # Memcache Vm
   config.vm.define "memcache" do |mem|
     mem.vm.box = "eurolinux-vagrant/centos-stream9"
     mem.vm.hostname = "memcache"
@@ -39,7 +39,7 @@ Vagrant.configure("2") do |config|
     mem.vm.provision "shell", path: "memcache.sh"
   end
 
-   Rabbit MQ VM
+  # Rabbit MQ VM
   config.vm.define "rabbitmq" do |rabbit|
     rabbit.vm.box = "eurolinux-vagrant/centos-stream9"
     rabbit.vm.hostname = "rabbitmq"
