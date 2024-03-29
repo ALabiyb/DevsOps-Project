@@ -67,11 +67,11 @@ systemctl enable tomcat
 
 git clone -b main https://github.com/ALabiyb/DevsOps-Project.git
 cd DevsOps-Project/
-mvn clean install
+mvn install
 systemctl stop tomcat
 sleep 20
 rm -rf /usr/local/tomcat/webapps/ROOT*
-cp target/DevsOps-Project.war /usr/local/tomcat/webapps/ROOT.war
+cp target/vprofile-v2.war /usr/local/tomcat/webapps/ROOT.war
 systemctl start tomcat
 sleep 10
 
