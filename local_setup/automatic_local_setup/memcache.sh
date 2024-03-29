@@ -17,4 +17,4 @@ firewall-cmd --add-port=11211/tcp
 firewall-cmd --runtime-to-permanent
 firewall-cmd --add-port=11211/udp
 firewall-cmd --runtime-to-permanent
-sudo memcached -p 11211 -U 11111 -u memcache -d
+sudo memcached -p 11211 -U 11111 -u memcached -d
