@@ -13,7 +13,8 @@ dnf install -y centos-release-rabbitmq-38
 dnf --enablerepo=centos-release-rabbitmq-38 install -y rabbitmq-server
 sudo systemctl enable rabbitmq-server
 
-
+sudo systemctl start firewalld
+sudo systemctl enable firewalld
 firewall-cmd --add-port=5672/tcp
 firewall-cmd --runtime-to-permanent
 

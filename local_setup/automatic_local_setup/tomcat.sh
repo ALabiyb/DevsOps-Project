@@ -77,10 +77,10 @@ sleep 10
 
 # Enabling the firewall and allowing port 8080 to access Tomcat
 echo "Enabling firewall and allowing port 8080..."
-systemctl start firewalld
-systemctl enable firewalld
-firewall-cmd --get-active-zones
-firewall-cmd --zone=public --add-port=8080/tcp --permanent
-firewall-cmd --reload
+sudo systemctl start firewalld
+sudo systemctl enable firewalld
+sudo firewall-cmd --get-active-zones
+sudo firewall-cmd --zone=public --add-port=8080/tcp --permanent
+sudo firewall-cmd --reload
 
 echo "All commands executed successfully."
