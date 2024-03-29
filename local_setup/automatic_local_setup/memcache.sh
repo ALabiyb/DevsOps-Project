@@ -16,5 +16,5 @@ systemctl enable firewalld
 firewall-cmd --add-port=11211/tcp
 firewall-cmd --runtime-to-permanent
 firewall-cmd --add-port=11211/udp
-firewall-cmd --permanent-to-runtime
-sudo memcached -p 11211 -u memcache -U memcache -d
+firewall-cmd --runtime-to-permanent
+sudo memcached -p 11211 -U 11111 -u memcache -d
