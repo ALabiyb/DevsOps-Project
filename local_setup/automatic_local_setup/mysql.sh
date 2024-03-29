@@ -48,8 +48,8 @@ sudo mysql -u root -p"$DATABASE_PASS" -e "FLUSH PRIVILEGES"
 sudo mysql -u root -p"$DATABASE_PASS" -e "create database accounts"
 sudo mysql -u root -p"$DATABASE_PASS" -e "grant all privileges on accounts.* TO 'admin'@'localhost' identified by 'admin123'"
 sudo mysql -u root -p"$DATABASE_PASS" -e "grant all privileges on accounts.* TO 'admin'@'%' identified by 'admin123'"
-sudo mysql -u root -p"$DATABASE_PASS" accounts < src/db.sql
-sudo mysql -u root -p"$DATABASE_PASS" -e "FLUSH PRIVILEGES"
+#sudo mysql -u root -p"$DATABASE_PASS" accounts < src/db.sql
+#sudo mysql -u root -p"$DATABASE_PASS" -e "FLUSH PRIVILEGES"
 mysql -u root -padmin123 accounts < /tmp/DevsOps-Project/src/db.sql
 sudo mysql -u root -p"$DATABASE_PASS" -e "FLUSH PRIVILEGES"
 
