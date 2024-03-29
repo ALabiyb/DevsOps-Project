@@ -9,7 +9,7 @@ apt install nginx -y
 
 # Create Nginx conf file
 echo 'upstream vproapp {
-    server app01:8080;
+    server tomcat:8080;
 }
 
 server {
@@ -26,6 +26,8 @@ rm -rf /etc/nginx/sites-enabled/default
 ln -s /etc/nginx/sites-available/vproapp /etc/nginx/sites-enabled/vproapp
 
 # Restart Nginx
+systemctl start nginx
+systemctl enable nginx
 systemctl restart nginx
 
 echo "All tasks completed successfully."
