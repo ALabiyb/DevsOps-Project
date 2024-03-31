@@ -65,22 +65,37 @@ echo "Starting and enabling Tomcat service..."
 systemctl start tomcat
 systemctl enable tomcat
 
-git clone -b main https://github.com/ALabiyb/DevsOps-Project.git
-cd DevsOps-Project/
+#git clone -b main https://github.com/ALabiyb/DevsOps-Project.git
+#cd DevsOps-Project/
+#mvn install
+#systemctl stop tomcat
+#sleep 20
+#rm -rf /usr/local/tomcat/webapps/ROOT*
+#cp target/vprofile-v2.war /usr/local/tomcat/webapps/ROOT.war
+#systemctl start tomcat
+#sleep 10
+
+# Enabling the firewall and allowing port 8080 to access Tomcat
+#echo "Enabling firewall and allowing port 8080..."
+#sudo systemctl start firewalld
+#sudo systemctl enable firewalld
+#sudo firewall-cmd --get-active-zones
+#sudo firewall-cmd --zone=public --add-port=8080/tcp --permanent
+#sudo firewall-cmd --reload
+
+git clone -b main https://github.com/hkhcoder/vprofile-project.git
+cd vprofile-project
 mvn install
 systemctl stop tomcat
 sleep 20
 rm -rf /usr/local/tomcat/webapps/ROOT*
 cp target/vprofile-v2.war /usr/local/tomcat/webapps/ROOT.war
 systemctl start tomcat
-sleep 10
-
-# Enabling the firewall and allowing port 8080 to access Tomcat
-echo "Enabling firewall and allowing port 8080..."
-sudo systemctl start firewalld
-sudo systemctl enable firewalld
-sudo firewall-cmd --get-active-zones
-sudo firewall-cmd --zone=public --add-port=8080/tcp --permanent
-sudo firewall-cmd --reload
+sleep 20
+systemctl stop firewalld
+systemctl disable firewalld
+#cp /vagrant/application.properties /usr/local/tomcat/webapps/ROOT/WEB-INF/classes/application.properties
+systemctl restart tomcat
 
 echo "All commands executed successfully."
+
